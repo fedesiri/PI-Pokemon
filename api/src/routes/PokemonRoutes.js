@@ -4,6 +4,7 @@ const { Router } = require('express');
 // const { conn } = require('./db.js');
 const { Pokemon } = require('../db.js');
 // Ejemplo: const authRouter = require('./auth.js');
+const { v4: uuidv4, validate: uuidValidate } = require('uuid');
 
 
 const router = Router();
@@ -17,10 +18,12 @@ router.get('/', async (req, res, next) =>{
         try{
             let pokemon;
             pokemon = await Pokemon.findAll({                
-                    nombre: name                
+                where: {
+                    nombre: name  
+                }              
             })
             if(pokemon.length){
-                res.send(pokemon)
+                res.send(pokemon[0])
             } else {
                 pokemon = await axios.get('https://pokeapi.co/api/v2/pokemon/' + name)
                 console.log(pokemon)
@@ -47,7 +50,7 @@ router.get('/', async (req, res, next) =>{
     } else {
         try{
             let ids = []
-            while(ids.length <= 40){
+            while(ids.length <= 2){
                 var numerosRandom = parseInt(Math.random()*100)
                 if(!ids.includes(numerosRandom) && numerosRandom !== 0){
                     ids.push(numerosRandom)
@@ -89,11 +92,17 @@ router.get('/:id', async (req, res, next) => {
     try{
         if(id){
             let pokemon;
-            pokemon = await Pokemon.findAll({
-                id: id
-            })
-            if(pokemon.length){
-                res.send(pokemon)
+            if(uuidValidate(id)){
+                pokemon = await Pokemon.findOne({
+                    where: {
+                        id: id
+                    }
+                })
+                if(pokemon){
+                    res.send(pokemon)
+                } else {
+                    res.status(404).send({message: 'No se encontró el pokemon buscado por ID.'})
+                }
             } else {
                 pokemon = await axios.get('https://pokeapi.co/api/v2/pokemon/' + id)
                 const pokemonPorId = {
@@ -110,33 +119,36 @@ router.get('/:id', async (req, res, next) => {
                 res.send(pokemonPorId)
             }
         }
-
     } catch(error){
         if(error.response.status === 404){
             res.status(404).send({message: 'No se encontró el pokemon buscado por ID.'})
         } else {
             next(error)
         }
+        next(error)
     }
-    //1)Obtener el detalle de un pokemon en particular, 2)Debe traer solo los datos pedidos en la ruta de detalle de pokemon, 3)Tener en cuenta que tiene que funcionar tanto para un id de un pokemon existente en pokeapi o uno creado por ustedes 
 })
 
 
 
 router.post('/', async (req, res, next) =>{
-    const { id, name, vida, fuerza, defensa, velocidad, altura, peso } = req.body
-    const newPokemon = await Pokemon.create({
-        id,
-        name,
-        vida,
-        fuerza,
-        defensa,
-        velocidad,
-        altura,
-        peso
-    })
-    res.send(newPokemon)
-    // res.send('1) Recibe los datos recolectados desde el formulario controlado de la ruta de creación de pokemons por body,   2)Crea un pokemon en la base de datos')
+    const { nombre, vida, fuerza, defensa, velocidad, altura, peso, imagen } = req.body
+    try{
+        const newPokemon = await Pokemon.create({
+            id: uuidv4(),
+            nombre,
+            vida,
+            fuerza,
+            defensa,
+            velocidad,
+            altura,
+            peso,
+            imagen
+        })
+        res.send(newPokemon)
+    } catch (error){
+        next(error)
+    }
 })
 
 
