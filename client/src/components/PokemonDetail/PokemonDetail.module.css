@@ -1,0 +1,62 @@
+.papa{
+    min-height: 100vh;
+    background-color: rgba(255, 255, 0, 0.829);
+   
+}
+
+/* .hijo{
+    display: flex;
+    flex-direction: column;
+    width:15%;
+    background-color: rgb(255, 196, 0);
+    margin-left: 43%;
+    border-radius: 10px;
+    box-shadow: 7px 10px 12px -1px rgba(0,0,0,0.81);
+    border: 2px solid #141313;
+    margin-bottom: 25px;
+} */
+
+.namImgTyp{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+ 
+}
+
+
+
+.id{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-evenly; */
+}
+
+.estadisticasVidaFuerza{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.estadisticaDefensaVelocidad{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.altPeso{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.boton{
+    text-decoration:none;
+    font-weight:600;
+    font-size:20px;
+    color:black;
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-left:40px;
+    padding-right:40px;
+    background-color:yellow;
+    border-radius: 20px;
+    border-color: black;
+}

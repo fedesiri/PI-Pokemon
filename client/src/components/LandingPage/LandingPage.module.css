@@ -1,0 +1,36 @@
+.fondo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    background-size: cover;
+    background-image: url('../../img/portada.jpg');
+}
+
+.titulo{
+    font-size: 50px;  
+    background-color: rgba(224, 228, 17, 0.692);
+}
+
+
+.botonEst{       
+    text-decoration:none;
+    font-weight:600;
+    font-size:20px;
+    color:black;
+    padding-top:20px;
+    padding-bottom:20px;
+    padding-left:40px;
+    padding-right:40px;
+    background-color:rgba(255,255,0,0.8);
+    border-radius: 20px;
+    border-color: black;
+    margin-bottom: 10px;
+}
+
+.botonEst:hover{       
+    background-color: rgba(255,255,0,1)
+}
+
+
+

@@ -1,0 +1,7 @@
+.todo{
+    min-height: 100vh;
+    background-color: rgba(255, 255, 0, 0.829);
+    display: flex;
+    justify-content:space-around;
+    flex-wrap: wrap;
+}

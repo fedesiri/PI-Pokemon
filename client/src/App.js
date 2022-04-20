@@ -1,9 +1,9 @@
 import './App.css';
 import { Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import Home from './components/Home';
-import Nav from './components/Nav'
-import PokemonDetail from './components/PokemonDetail'
+import LandingPage from './components/LandingPage/LandingPage';
+import Home from './components/Home/Home';
+import Nav from './components/Nav/Nav';
+import PokemonDetail from './components/PokemonDetail/PokemonDetail'
 import PokemonCreate from './components/PokemonCreate'
 
 
@@ -15,7 +15,7 @@ function App() {
       <Route path= '/home' component= {Nav}/>
       <Route path='/home' component={Home}/>
       <Route path= '/pokemon' component= {Nav}/>
-      <Route path='/pokemon/detail' component={PokemonDetail}/>
+      <Route path='/pokemon/detail/:id' component={PokemonDetail}/>
       <Route path='/pokemon/create' component={PokemonCreate}/>
     </div>
   );

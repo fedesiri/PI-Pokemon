@@ -1,4 +1,4 @@
-import { GET_ALL_POKEMONS, GET_ALL_TYPES, SEARCH_POKEMON } from "../actions"
+import { GET_ALL_POKEMONS, GET_ALL_TYPES, SEARCH_POKEMON_ID } from "../actions"
 
 const initialState = {
     pokemons: [],
@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
             pokemons: action.payload
         }
     }
-    if(action.type === SEARCH_POKEMON){
+    if(action.type === SEARCH_POKEMON_ID){
         return {
             ...state,
             pokemonDetails: action.payload

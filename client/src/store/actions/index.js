@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
-export const SEARCH_POKEMON = 'SEARCH_POKEMON'
+export const SEARCH_POKEMON_NAME = 'SEARCH_POKEMON_NAME'
+export const SEARCH_POKEMON_ID = 'SEARCH_POKEMON_ID'
 export const GET_ALL_TYPES = 'GET_ALL_TYPES';
 export const POKEMON_CREATE = 'POKEMON_CREATE';
 export const POKEMON_DETAIL = 'POKEMON_DETAIL';
@@ -22,12 +23,26 @@ export const getAllPokemons = () => {
     }     
 }
 
-export const searchPokemons = (search) => {
+export const searchPokemonByName = (search) => {
     return async function(dispatch){
         try{
             let pokemon = await axios.get('http://localhost:3001/api/pokemons?name=' + search)        
             dispatch({
-                type: SEARCH_POKEMON,
+                type: SEARCH_POKEMON_NAME,
+                payload: pokemon.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }     
+}
+
+export const searchPokemonById = (id) => {
+    return async function(dispatch){
+        try{
+            let pokemon = await axios.get('http://localhost:3001/api/pokemons/' + id)        
+            dispatch({
+                type: SEARCH_POKEMON_ID,
                 payload: pokemon.data
             })
         } catch (error) {

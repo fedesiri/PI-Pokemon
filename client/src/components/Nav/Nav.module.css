@@ -1,0 +1,29 @@
+.papa{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(59, 56, 56);
+    padding-bottom: 1%;
+    padding-top: 1%;
+}
+
+.hijo1{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+}
+
+.hijo2{
+    display: flex;
+    justify-content:flex-end;
+    align-items: center;
+    width: 50%;
+}
+
+.crearP{
+    color: white;
+    margin-left: 5%;
+    margin-right: 5%;
+    text-decoration: none;
+}
+

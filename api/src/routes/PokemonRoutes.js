@@ -74,7 +74,7 @@ router.get('/', async (req, res, next) =>{
             }
         } catch (error) {
             if(error.response.status === 404){
-                res.status(404).send({message: 'No se encontró el pokemon buscado por nombre.'})
+                res.send({message: 'No se encontró el pokemon buscado por nombre.'})
             } else {
                 next(error)
             }
@@ -123,7 +123,7 @@ router.get('/:id', async (req, res, next) => {
             if(pokemon){
                 res.send(pokemon)
             } else {
-                res.status(404).send({message: 'No se encontró el pokemon buscado por ID.'})
+                res.send({message: 'No se encontró el pokemon buscado por ID.'})
             }
         } else {
             pokemon = await axios.get('https://pokeapi.co/api/v2/pokemon/' + id)
@@ -132,7 +132,7 @@ router.get('/:id', async (req, res, next) => {
         }        
     } catch(error){
         if(error.response.status === 404){
-            res.status(404).send({message: 'No se encontró el pokemon buscado por ID.'})
+            res.send({message: 'No se encontró el pokemon buscado por ID.'})
         } else {
             next(error)
         }
