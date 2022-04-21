@@ -3,10 +3,11 @@ import axios from 'axios'
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
 export const SEARCH_POKEMON_NAME = 'SEARCH_POKEMON_NAME'
 export const SEARCH_POKEMON_ID = 'SEARCH_POKEMON_ID'
+export const SORT_BY_NAME_BY_ATTACK = 'SORT_BY_NAME_BY_ATTACK';
 export const GET_ALL_TYPES = 'GET_ALL_TYPES';
+
 export const POKEMON_CREATE = 'POKEMON_CREATE';
-export const POKEMON_DETAIL = 'POKEMON_DETAIL';
-export const DELETE_POKEMON = 'DELETE_POKEMON'; 
+
 
 export const getAllPokemons = () => {
     return function(dispatch){
@@ -49,6 +50,13 @@ export const searchPokemonById = (id) => {
             console.log(error)
         }
     }     
+}
+
+export const sortByNameByAttack = (order) => {
+    return {
+        type: SORT_BY_NAME_BY_ATTACK,
+        payload: order
+    }
 }
 
 export const getAllTypes = () => {

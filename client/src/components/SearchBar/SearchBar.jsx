@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import s from './SearchBar.module.css'
 
+
 export default function SearchBar(props){
 
     const [search, setSearch] = useState("")
@@ -28,12 +29,13 @@ export default function SearchBar(props){
         return pokemon.data
     }
     
-    return (
+    return (    
+        
         <form className={s.papa} onSubmit={onSubmit}>
             <input className={s.inputBuscar} type="submit" value="Buscar"/>
             <input className={s.inputText} type="text" placeholder="Pokemon"  onChange={onInputChange} value={search} />
         </form>
-
+        
     )
     
 }

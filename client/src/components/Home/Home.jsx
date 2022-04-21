@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import { getAllPokemons } from '../../store/actions';
 import Pokemon from '../Pokemon/Pokemon';
 import s from './Home.module.css'
+import OrderNameYattack from '../OrderNameYattack/OrderNameYattack';
 
 
 
@@ -12,12 +13,19 @@ const Home = () => {
 
     let dispatch = useDispatch()
 
+    
     useEffect(() =>{
-        dispatch(getAllPokemons())
-    }, [dispatch])
+        if(!pokemons.length){
+            dispatch(getAllPokemons())
+        }
+    }, [dispatch, pokemons.length])
 
 
-    return (
+    return (        
+        <div>
+        <div className={s.sort}>
+            <OrderNameYattack/>
+        </div>
         <div className={s.todo}>
             
             {pokemons?.map((pokemon) => {
@@ -29,6 +37,7 @@ const Home = () => {
                tipos={pokemon.types}              
                />
             })}
+        </div>
         </div>
     );
 };

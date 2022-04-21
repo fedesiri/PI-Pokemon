@@ -1,62 +1,84 @@
 .papa{
     min-height: 100vh;
-    background-color: rgba(255, 255, 0, 0.829);
-   
+    /* background-color: rgba(255, 255, 0, 0.829);    */
+    background: #fceabb;  
+    background: -webkit-linear-gradient(to top, #f8b500, #fceabb); 
+    background: linear-gradient(to top, #f8b500, #fceabb); 
+    
 }
 
-/* .hijo{
+.nombre{
     display: flex;
     flex-direction: column;
-    width:15%;
+    font-size: 50px;
     background-color: rgb(255, 196, 0);
-    margin-left: 43%;
-    border-radius: 10px;
-    box-shadow: 7px 10px 12px -1px rgba(0,0,0,0.81);
-    border: 2px solid #141313;
-    margin-bottom: 25px;
-} */
-
-.namImgTyp{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
- 
 }
 
+.img{
+    display: flex;
+    justify-content: space-around;
+    /* display: flex;
+    justify-content: flex-start; */
+}
+
+.id{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.tipo{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 150px;
+    margin-right: 150px;
+}
 
 
 .id{
     display: flex;
     flex-direction: row;
-    /* justify-content: space-evenly; */
 }
 
 .estadisticasVidaFuerza{
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
 }
 
 .estadisticaDefensaVelocidad{
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
 }
 
 .altPeso{
     display: flex;
+    flex-direction: row;
     justify-content: space-evenly;
 }
 
+
+
 .boton{
-    text-decoration:none;
-    font-weight:600;
-    font-size:20px;
-    color:black;
-    padding-top:20px;
-    padding-bottom:20px;
-    padding-left:40px;
-    padding-right:40px;
-    background-color:yellow;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    color: black;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 25px;
+    padding-right: 25px;
     border-radius: 20px;
     border-color: black;
+    background-color: rgba(255,255,0,1)
+}
+
+.boton:hover{       
+    background-color:rgba(255,255,0,0.8);
 }

@@ -26,44 +26,49 @@ const PokemonDetail = (props) => {
 
     return (
         <div className={s.papa}>
-            <div className={s.hijo}>
 
-                <div className={s.namImgTyp}>
-                    <h2>{capitalizeLetter(pokemonDetails.nombre)}</h2>
-                    <img src={pokemonDetails.imagen} alt='img not found'/>
-                    {pokemonDetails.types?.map((tipo) =>{
-                        return <span key={tipo.id}>Tipo: {tipo.nombre}</span>                    
-                    })}      
-                </div>
 
-                <div className={s.id}>
-                    <span>Id:</span>
-                    <p>{pokemonDetails.id}</p>
-                </div>
-
-                <div className={s.estadisticasVidaFuerza}>
-                    <span>Vida:</span>
-                    <p>{pokemonDetails.vida}</p>
-
-                    <span>Fuerza:</span> 
-                    <p>{pokemonDetails.fuerza}</p>
-                </div>
-                <div className={s.estadisticaDefensaVelocidad}>
-                    <span>Defensa:</span>
-                    <p>{pokemonDetails.defensa}</p>
-
-                    <span>Velocidad:</span>
-                    <p>{pokemonDetails.velocidad}</p>
-                </div>
-
-                <div className={s.altPeso}>
-                    <span>Altura: </span>
-                    <p>{pokemonDetails.altura}</p>
-                    <span>Peso:</span>
-                    <p>{pokemonDetails.peso}</p>
-                </div>
-            
+            <div className={s.nombre}>
+                <span>Caracteristicas de {capitalizeLetter(pokemonDetails.nombre)}</span>
             </div>
+
+            <div className={s.img}>
+                <img src={pokemonDetails.imagen} alt='img not found'/>
+            </div>
+
+            <div className={s.id}>
+                <h3>Numero de identificacion: { pokemonDetails.id }</h3>
+            </div>
+
+            <div className={s.tipo}>
+                <h3>{pokemonDetails.types.length > 1 ? 'Tipos: ' : 'Tipo: '}</h3>
+                <ul>
+                {pokemonDetails.types?.map((tipo) =>{
+                    return <li key={tipo.id}><h4>{tipo.nombre}</h4> </li>                    
+                })}      
+                </ul>
+            </div>
+
+                <h2>Estadisticas: </h2>
+
+            <div className={s.estadisticasVidaFuerza}>
+                <h4>Vida: {pokemonDetails.vida}</h4>
+                <h4>Fuerza: {pokemonDetails.fuerza}</h4>          
+            </div>
+
+            <div className={s.estadisticaDefensaVelocidad}>
+                <h4>Defensa: {pokemonDetails.defensa}</h4>
+                <h4>Velocidad: {pokemonDetails.velocidad}</h4>
+            </div>
+
+            <div className={s.altPeso}>
+                <h4>Altura: {pokemonDetails.altura}</h4>
+                <h4>Peso: {pokemonDetails.peso}</h4>
+            </div>
+
+            
+            
+            
             <Link to={'/home'}><button className={s.boton} >Regresar a 'Home'</button></Link>
         </div>
     );

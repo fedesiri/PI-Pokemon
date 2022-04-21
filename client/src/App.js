@@ -4,7 +4,7 @@ import LandingPage from './components/LandingPage/LandingPage';
 import Home from './components/Home/Home';
 import Nav from './components/Nav/Nav';
 import PokemonDetail from './components/PokemonDetail/PokemonDetail'
-import PokemonCreate from './components/PokemonCreate'
+import PokemonCreate from './components/PokemonCreate/PokemonCreate'
 
 
 

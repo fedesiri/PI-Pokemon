@@ -1,0 +1,134 @@
+.padre {   
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, #f8b500, #fceabb);
+}
+
+.div1 {
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8b500;
+}
+
+.titulo{
+    font-size: xx-large;
+}
+
+.subTitulo{
+    font-size: 20px;
+}
+
+.div2 {
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.img{
+    width: 100%;
+}
+
+.div3 {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+form {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formSuperior {
+    height: 80%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.inputs {
+    width: 28%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.inputYLabel {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputDeTexto {
+    width: 60%;
+}
+
+.tipos {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.checkboxYLabel {
+    width: 20%;
+    height: 9%;
+    border: 1px solid transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formInferior {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.botonDeRegreso {
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.btnCrearEstilos{
+    width: 55%;
+    height: 40px;
+    background-color: rgba(255,255,0,0.8);
+    border-radius: 12px;
+    border-color: black; 
+}
+.btnCrearEstilos:hover{       
+    background-color: rgba(255,255,0,1)
+}
+
+
+.btnRegresarEstilos{
+    width: 20%;
+    height: 50px;
+    background-color:rgba(255,255,0,0.8);
+    border-radius: 10px;
+    border-color: black;
+}
+
+.btnRegresarEstilos:hover{
+    background-color: rgba(255,255,0,1)
+}
+
+
