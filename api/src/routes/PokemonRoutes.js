@@ -118,7 +118,13 @@ router.get('/:id', async (req, res, next) => {
             pokemon = await Pokemon.findOne({
                 where: {
                     id: id
-                }
+                },
+                include: [
+                    {
+                        model: Type,  
+                        attributes: ['id', 'nombre']
+                    }
+                ]         
             })
             if(pokemon){
                 res.send(pokemon)
@@ -138,8 +144,6 @@ router.get('/:id', async (req, res, next) => {
         }
     }
 })
-
-
 
 router.post('/', async (req, res, next) =>{
     const { nombre, vida, fuerza, defensa, velocidad, altura, peso, imagen, tipos } = req.body
@@ -179,7 +183,18 @@ router.post('/', async (req, res, next) =>{
                 })
             })       
             await Promise.all(promises)
-            res.send(newPokemon)
+            let pokemonRta = await Pokemon.findOne({
+                where: {
+                    id: newPokemon.id
+                },
+                include: [
+                    {
+                        model: Type,  
+                        attributes: ['id', 'nombre']
+                    }
+                ]         
+            })               
+            res.send(pokemonRta)
         }
     } catch (error){
         next(error)
