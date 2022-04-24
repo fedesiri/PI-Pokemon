@@ -1,57 +1,53 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import {Link} from 'react-router-dom'
-import { getAllTypes } from '../../store/actions';
-// import { useDispatch } from 'react-redux';
+import { createPokemons, getAllTypes } from '../../store/actions';
 import s from './PokemonCreate.module.css'
 import imagen from '../../img/pokemons.png'
+import { capitalizeLetter } from '../../utils';
 
 export function validate(input){  
   let errors = {}
   if(!input.nombre){
-    errors.nombre = 'Ingresa un nombre para tu Pokemon';
-  } else if (typeof input.nombre !== 'string') {
-    errors.nombre = 'El nombre ingresado es incorrecto';
+    errors.nombre = 'Ingresa un nombre.';
+    console.log(input.nombre)
+  } else if (input.nombre.length < 3) {
+    errors.nombre = 'Debe contener al menos 3 caracteres';
   } 
   if(!input.vida){
-    errors.vida = 'Ingresa un valor de vida para tu Pokemon';
-  } else if (typeof input.vida !== Number){
-    errors.vida = 'El valor ingresado es incorrecto';
+    errors.vida = 'Ingresa un valor "vida"';
+  } else if (input.vida <= 0 || input.vida > 150){
+    errors.vida = 'Valor entre 1 y 150';
   }
   if(!input.fuerza){
-    errors.fuerza = 'Ingresa un valor de fuerza para tu Pokemon';
-  } else if (typeof input.fuerza !== Number){
-    errors.fuerza = 'El valor ingresado es incorrecto';
+    errors.fuerza = 'Ingresa un valor "fuerza"';
+  } else if (input.fuerza <= 0 || input.fuerza > 150){
+    errors.fuerza = 'Valor entre 1 y 150';
   }
   if(!input.defensa){
-    errors.defensa = 'Ingresa un valor de defensa para tu Pokemon';
-  } else if (typeof input.defensa !== Number){
-    errors.defensa = 'El valor ingresado es incorrecto';
+    errors.defensa = 'Ingresa un valor "defensa"';
+  } else if (input.defensa <= 0 || input.defensa > 150){
+    errors.defensa = 'Valor entre 1 y 150';
   }
   if(!input.velocidad){
-    errors.velocidad = 'Ingresa un valor de velocidad para tu Pokemon';
-  } else if (typeof input.velocidad !== Number){
-    errors.velocidad = 'El valor ingresado es incorrecto';
+    errors.velocidad = 'Ingresa un valor "velocidad"';
+  } else if (input.velocidad <= 0 || input.velocidad > 150){
+    errors.velocidad = 'Valor entre 1 y 150';
   }
   if(!input.altura){
-    errors.altura = 'Ingresa un valor de altura para tu Pokemon';
-  } else if (typeof input.altura !== Number){
-    errors.altura = 'El valor ingresado es incorrecto';
+    errors.altura = 'Ingresa un valor "altura"';
+  } else if (input.altura <= 0 || input.altura > 100){
+    errors.altura = 'Ingresa un valor entre 1 y 100';
   }
   if(!input.peso){
-    errors.peso = 'Ingresa un valor de peso para tu Pokemon';
-  } else if (typeof input.peso !== Number){
-    errors.peso = 'El valor ingresado es incorrecto';
-  }
-  if(!input.tipo){
-    errors.tipo = 'Ingresa un valor de tipo para tu Pokemon';
-  } else if (typeof input.tipo !== Number){
-    errors.tipo = 'El valor ingresado es incorrecto';
+    errors.peso = 'Ingresa un valor "peso"';
+  } else if (input.altura <= 0 || input.altura > 3000){
+    errors.peso = 'Ingresa un valor entre 1 y 3000';
   }
   if(!input.imagen){
-    errors.imagen = 'Ingresa un valor de imagen para tu Pokemon';
-  } else if (typeof input.imagen !== Number){
-    errors.imagen = 'El valor ingresado es incorrecto';
+    errors.imagen = 'Ingresa un valor "imagen"';
+  } else if (typeof input.imagen !== 'string'){
+    errors.imagen = 'Debes ingresar una url que contenga la imagen';
   }
 
   return errors
@@ -71,36 +67,44 @@ const PokemonCreate = () => {
   }, [dispatch, tipos.length])
 
 
-
-    const [input, setInput] = useState({
-        nombre: "",
-        vida: "",
-        fuerza: "",
-        defensa: "",
-        velocidad: "",
-        altura: "",
-        peso: "",
-        tipo: "",
-        imagen: "",
+  
+  
+  const [input, setInput] = useState({
+    nombre: "",
+    vida: "",
+    fuerza: "",
+    defensa: "",
+    velocidad: "",
+    altura: "",
+    peso: "",
+    imagen: "",
+  });
+  
+  const [errors, setErrors] = useState({});
+  
+  const [types, setTypes] = useState([])
+  
+  
+  const handleInputChange = function(e) {
+    e.preventDefault()
+    setInput({
+      ...input,
+      [e.target.name]: e.target.value
     });
-
-    // const [errors, setErrors] = useState({});
-
-
-    const handleInputChange = function(e) {
-        e.preventDefault()
-        setInput({
+  }
+  
+  const handleInputSubmit = function(e){
+    e.preventDefault() 
+        setErrors(validate({
           ...input,
           [e.target.name]: e.target.value
-        });
-        // setErrors(validate({
-        //   ...input,
-        //   [e.target.nombre]: e.target.value
-        // }))
-      }
+        }))        
 
-      const handleInputSubmit = function(e){
-        e.preventDefault() 
+        let body = {
+          ...input,
+          tipos: types
+        }
+        dispatch(createPokemons(body))
         setInput({
           nombre: "",
           vida: "",
@@ -109,11 +113,21 @@ const PokemonCreate = () => {
           velocidad: "",
           altura: "",
           peso: "",
-          tipo: "",
           imagen: "",
         })
-        // dispatch((input))  
+        setTypes([])
         
+      }
+
+
+      const handleInputCheckbox = function(e){ 
+        let nuevoArray = []
+        if(!types.includes(e.target.name)){
+          nuevoArray = types.concat(e.target.name)
+        } else {
+         nuevoArray = types.filter((nombre) => e.target.name !== nombre)                
+        }
+        setTypes(nuevoArray)    
       }
 
       return (
@@ -133,42 +147,67 @@ const PokemonCreate = () => {
                   <div className={s.inputs}>
                       <div className={s.inputYLabel}>
                         <label>Nombre: </label>
-                        <input className={s.inputDeTexto} size="27" name='nombre' type='text'  onChange={handleInputChange} value={input.nombre}/>
+                        <input className={s.inputDeTexto && errors.nombre && s.danger} placeholder='Debe contener al menos 3 caracteres' size="27" name='nombre' type='text'  onChange={handleInputChange} value={input.nombre}/> 
+                        {errors.nombre && (
+                          <p className={s.danger}>{errors.nombre}</p>
+                          )}
                       </div>
+                    
 
                       <div className={s.inputYLabel}>
                         <label>Vida: </label>
-                        <input className={s.inputDeTexto} size="27" name='vida' type='number'  onChange={handleInputChange} value={input.vida}/>
+                        <input className={s.inputDeTexto && errors.vida && s.danger} placeholder='Valor entre 1 y 150' size="20" name='vida' type='number'  onChange={handleInputChange} value={input.vida}/>
+                        {errors.vida && (
+                          <p className={s.danger}>{errors.vida}</p>
+                          )}
                       </div>
 
                       <div className={s.inputYLabel}>
                         <label>Fuerza: </label>
-                        <input className={s.inputDeTexto} size="27" name='fuerza'  type='number'  onChange={handleInputChange} value={input.fuerza}/>
+                        <input className={s.inputDeTexto && errors.fuerza && s.danger} placeholder='Valor entre 1 y 150' size="20" name='fuerza'  type='number'  onChange={handleInputChange} value={input.fuerza}/>
+                        {errors.fuerza && (
+                          <p className={s.danger}>{errors.fuerza}</p>
+                          )}
                       </div>
 
                       <div className={s.inputYLabel}>
                         <label>Defensa: </label>
-                        <input className={s.inputDeTexto} size="27" name='defensa' type='number'  onChange={handleInputChange} value={input.defensa}/>
+                        <input className={s.inputDeTexto && errors.defensa && s.danger} placeholder='Valor entre 1 y 150' size="20" name='defensa' type='number'  onChange={handleInputChange} value={input.defensa}/>
+                        {errors.defensa && (
+                          <p className={s.danger}>{errors.defensa}</p>
+                          )}
                       </div>
 
                       <div className={s.inputYLabel}>
                         <label>Velocidad: </label>
-                        <input className={s.inputDeTexto} size="27" name='velocidad' type='number'  onChange={handleInputChange} value={input.velocidad}/>
+                        <input className={s.inputDeTexto && errors.velocidad && s.danger} placeholder='Valor entre 1 y 150' size="20" name='velocidad' type='number'  onChange={handleInputChange} value={input.velocidad}/>
+                        {errors.velocidad && (
+                          <p className={s.danger}>{errors.velocidad}</p>
+                          )}
                       </div>
 
                       <div className={s.inputYLabel}>
                         <label>Altura: </label>
-                        <input className={s.inputDeTexto} size="27" name='altura' type='number'  onChange={handleInputChange} value={input.altura}/>
+                        <input className={s.inputDeTexto && errors.altura && s.danger} placeholder='Valor entre 1 y 100' size="20" name='altura' type='number'  onChange={handleInputChange} value={input.altura}/>
+                        {errors.altura && (
+                          <p className={s.danger}>{errors.altura}</p>
+                          )}
                       </div>
 
                       <div className={s.inputYLabel}>
                         <label>Peso: </label>
-                        <input className={s.inputDeTexto} size="27" name='peso' type='number'  onChange={handleInputChange} value={input.peso}/>
+                        <input className={s.inputDeTexto && errors.peso && s.danger} placeholder='Valor entre 1 y 3000' size="20" name='peso' type='number'  onChange={handleInputChange} value={input.peso}/>
+                        {errors.peso && (
+                          <p className={s.danger}>{errors.peso}</p>
+                          )}
                       </div>
 
                       <div className={s.inputYLabel}>
                         <label>Imagen: </label>
-                        <input className={s.inputDeTexto} size="27" name='imagen' onChange={handleInputChange} value={input.imagen}/>
+                        <input className={s.inputDeTexto && errors.imagen && s.danger} placeholder= 'Ingresa una url que contenga la imagen' size="27" name='imagen' onChange={handleInputChange} value={input.imagen}/>
+                        {errors.imagen && (
+                          <p className={s.danger}>{errors.imagen}</p>
+                          )}
                       </div>
 
                   </div>                  
@@ -178,8 +217,8 @@ const PokemonCreate = () => {
                     {tipos?.map((tipo) =>{
                       return (
                         <div className={s.checkboxYLabel} key={tipo.id}>
-                          <input type='checkbox'/> 
-                          <label >{tipo.nombre}</label>
+                          <input type='checkbox' name={tipo.nombre} onChange={handleInputCheckbox}/> 
+                          <label >{capitalizeLetter(tipo.nombre)}</label>
                         </div>                    
                       )
                     })}           

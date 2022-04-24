@@ -1,12 +1,11 @@
 import axios from 'axios'
 
 export const GET_ALL_POKEMONS = 'GET_ALL_POKEMONS';
-export const SEARCH_POKEMON_NAME = 'SEARCH_POKEMON_NAME'
 export const SEARCH_POKEMON_ID = 'SEARCH_POKEMON_ID'
 export const SORT_BY_NAME_BY_ATTACK = 'SORT_BY_NAME_BY_ATTACK';
 export const GET_ALL_TYPES = 'GET_ALL_TYPES';
-
 export const POKEMON_CREATE = 'POKEMON_CREATE';
+export const FILTER_BY_CREATED_OR_EXISTING = 'FILTER_BY_CREATED_OR_EXISTING'
 
 
 export const getAllPokemons = () => {
@@ -24,19 +23,7 @@ export const getAllPokemons = () => {
     }     
 }
 
-export const searchPokemonByName = (search) => {
-    return async function(dispatch){
-        try{
-            let pokemon = await axios.get('http://localhost:3001/api/pokemons?name=' + search)        
-            dispatch({
-                type: SEARCH_POKEMON_NAME,
-                payload: pokemon.data
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }     
-}
+
 
 export const searchPokemonById = (id) => {
     return async function(dispatch){
@@ -71,5 +58,27 @@ export const getAllTypes = () => {
         .catch((error) =>{
             console.log(error)
         })
+    }
+}
+
+export const createPokemons = (body) => {
+    return async function(dispatch){
+        try{
+            let pokemonCreado = await axios.post('http://localhost:3001/api/pokemons', body)
+            dispatch({
+                type: POKEMON_CREATE,
+                payload: pokemonCreado.data
+            })
+        } catch (error){
+            console.log(error)
+        }    
+    }
+}
+
+
+export const filterByCreatedOrExisting = (filter) => {
+    return {
+        type: FILTER_BY_CREATED_OR_EXISTING,
+        payload: filter    
     }
 }

@@ -4,13 +4,13 @@ import { getAllPokemons } from '../../store/actions';
 import Pokemon from '../Pokemon/Pokemon';
 import s from './Home.module.css'
 import OrderNameYattack from '../OrderNameYattack/OrderNameYattack';
-
+import FilterCreate from '../FilterCreate/FilterCreate';
 
 
 const Home = () => {
     
-    let pokemons = useSelector((state) => state.pokemons) 
-
+    let pokemons = useSelector((state) => state.filtrados) 
+    
     let dispatch = useDispatch()
 
     
@@ -23,21 +23,23 @@ const Home = () => {
 
     return (        
         <div>
-        <div className={s.sort}>
-            <OrderNameYattack/>
-        </div>
-        <div className={s.todo}>
             
-            {pokemons?.map((pokemon) => {
-               return <Pokemon 
-               key = {pokemon.id}
-               id = {pokemon.id}
-               nombre={pokemon.nombre} 
-               imagen={pokemon.imagen} 
-               tipos={pokemon.types}              
-               />
-            })}
-        </div>
+            <div className={s.sort}>
+                <FilterCreate/>
+                <OrderNameYattack/>
+            </div>
+            <div className={s.todo}>
+                
+                {pokemons?.map((pokemon) => {
+                return <Pokemon 
+                key = {pokemon.id}
+                id = {pokemon.id}
+                nombre={pokemon.nombre} 
+                imagen={pokemon.imagen} 
+                tipos={pokemon.types}              
+                />
+                })}
+            </div>
         </div>
     );
 };

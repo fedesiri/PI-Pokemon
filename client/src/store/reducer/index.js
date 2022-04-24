@@ -1,7 +1,10 @@
-import { GET_ALL_POKEMONS, GET_ALL_TYPES, SEARCH_POKEMON_ID, SORT_BY_NAME_BY_ATTACK } from "../actions"
+import { FILTER_BY_CREATED_OR_EXISTING, GET_ALL_POKEMONS, GET_ALL_TYPES, POKEMON_CREATE, SEARCH_POKEMON_ID, SORT_BY_NAME_BY_ATTACK } from "../actions"
+import {validate as uuidValidate} from 'uuid'
+// const { v4: uuidv4, validate: uuidValidate } = require('uuid');
 
 const initialState = {
     pokemons: [],
+    filtrados: [],
     types: [],
     pokemonDetails: {}
 }
@@ -10,7 +13,8 @@ export default function reducer(state = initialState, action) {
     if(action.type === GET_ALL_POKEMONS){
         return {
             ...state,
-            pokemons: action.payload
+            pokemons: action.payload,
+            filtrados: action.payload
         }
     }
     if(action.type === SEARCH_POKEMON_ID){
@@ -26,7 +30,7 @@ export default function reducer(state = initialState, action) {
         }
     }
     if(action.type === SORT_BY_NAME_BY_ATTACK){
-        let ordenados = [...state.pokemons] 
+        let ordenados = [...state.filtrados] 
         if(action.payload === 'A-Z' || action.payload === 'Z-A'){
             ordenados.sort(function(a,b){
                 if(a.nombre < b.nombre){
@@ -48,10 +52,27 @@ export default function reducer(state = initialState, action) {
                 return 0;
             })
         }
-        console.log(ordenados)
         return {
             ...state,
-            pokemons: ordenados
+            filtrados: ordenados
+        }
+    }
+    if(action.type === POKEMON_CREATE){
+        return{
+            ...state,
+            pokemons: state.pokemons.concat(action.payload)
+        }
+    }
+    if(action.type === FILTER_BY_CREATED_OR_EXISTING){
+        let filtrados = [...state.pokemons]
+        if(action.payload === 'creadosPorNosotros'){
+            filtrados = filtrados.filter(filtrado => uuidValidate(filtrado.id))
+        } else if (action.payload === 'pokemonsExistentes') {
+            filtrados = filtrados.filter(filtrado => !uuidValidate(filtrado.id))
+        }
+        return{
+            ...state,
+            filtrados: filtrados            
         }
     }
     return state

@@ -6,7 +6,7 @@ export default function OrderNameYattack(){
 
     const dispatch = useDispatch()
 
-    function onSelectChange(e){
+    function onSelectChange(e){ 
         dispatch(sortByNameByAttack(e.target.value))
     }
 
