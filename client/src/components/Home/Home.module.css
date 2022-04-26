@@ -9,3 +9,7 @@
     justify-content:space-around;
     flex-wrap: wrap;
 }
+
+.span{
+    font-size: larger;
+}

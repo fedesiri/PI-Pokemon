@@ -1,4 +1,4 @@
-import { FILTER_BY_CREATED_OR_EXISTING, GET_ALL_POKEMONS, GET_ALL_TYPES, POKEMON_CREATE, SEARCH_POKEMON_ID, SORT_BY_NAME_BY_ATTACK } from "../actions"
+import { FILTER_BY_CREATED_OR_EXISTING, FILTER_BY_TYPE, GET_ALL_POKEMONS, GET_ALL_TYPES, POKEMON_CREATE, SEARCH_POKEMON_ID, SORT_BY_NAME_BY_ATTACK } from "../actions"
 import {validate as uuidValidate} from 'uuid'
 // const { v4: uuidv4, validate: uuidValidate } = require('uuid');
 
@@ -6,7 +6,7 @@ const initialState = {
     pokemons: [],
     filtrados: [],
     types: [],
-    pokemonDetails: {}
+    pokemonDetails: {},
 }
 
 export default function reducer(state = initialState, action) {
@@ -30,7 +30,7 @@ export default function reducer(state = initialState, action) {
         }
     }
     if(action.type === SORT_BY_NAME_BY_ATTACK){
-        let ordenados = [...state.filtrados] 
+        let ordenados = [...state.pokemons] 
         if(action.payload === 'A-Z' || action.payload === 'Z-A'){
             ordenados.sort(function(a,b){
                 if(a.nombre < b.nombre){
@@ -60,13 +60,14 @@ export default function reducer(state = initialState, action) {
     if(action.type === POKEMON_CREATE){
         return{
             ...state,
-            pokemons: state.pokemons.concat(action.payload)
+            pokemons: state.pokemons.concat(action.payload),
+            filtrados: state.pokemons.concat(action.payload),
         }
     }
     if(action.type === FILTER_BY_CREATED_OR_EXISTING){
         let filtrados = [...state.pokemons]
-        if(action.payload === 'creadosPorNosotros'){
-            filtrados = filtrados.filter(filtrado => uuidValidate(filtrado.id))
+        if(action.payload === 'creadosPorNosotros'){          
+            filtrados = filtrados.filter(filtrado => uuidValidate(filtrado.id))         
         } else if (action.payload === 'pokemonsExistentes') {
             filtrados = filtrados.filter(filtrado => !uuidValidate(filtrado.id))
         }
@@ -75,5 +76,27 @@ export default function reducer(state = initialState, action) {
             filtrados: filtrados            
         }
     }
+    if(action.type === FILTER_BY_TYPE){
+        let filtrados = [...state.pokemons]
+        let arrayPokemonsTipos = []
+        if(action.payload !== 'buscarPorTipos'){
+            for(var i = 0; i < filtrados?.length; i++){
+                for(var j = 0; j < filtrados[i].types.length; j++){
+                    if(filtrados[i].types[j].nombre === action.payload){
+                        arrayPokemonsTipos.push(filtrados[i])
+                    }
+                }
+            }
+            return {
+                ...state,
+                filtrados: arrayPokemonsTipos
+            }
+        }
+        return{
+            ...state,
+            filtrados: filtrados
+        }
+    }
+
     return state
 }

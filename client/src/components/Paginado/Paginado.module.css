@@ -1,0 +1,67 @@
+.padre{
+    background: linear-gradient(to right, #f8b500, #fceabb); 
+    display: flex;
+}
+.nav{
+width: 100%;
+}
+
+.ul{
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    margin-top: 15px;
+    /* display: flex;
+    justify-content: space-evenly;
+    margin-left: 40%;
+    margin-right: 40%; */
+}
+
+.li{
+    display: inline;
+    border-radius: 5px;    
+    
+}
+
+.boton{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;   
+    background-color: #f8b500;
+    color: black;
+    border-radius: 5px;
+    font-size: 22px;
+    border: 1px solid black;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.boton:hover{       
+    background-color: rgba(255,255,0,1)
+}
+
+.botonSeleccionado{
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;   
+    background-color: rgba(255,255,0,1);
+    color: black;
+    border-radius: 5px;
+    font-size: 22px;
+    border: 1px solid black;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.botonSeleccionado:hover{       
+    background-color: rgba(255,255,0,1)
+}
+
+
+
+
+
+
+

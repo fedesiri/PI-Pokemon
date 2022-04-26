@@ -6,55 +6,64 @@ import s from './PokemonCreate.module.css'
 import imagen from '../../img/pokemons.png'
 import { capitalizeLetter } from '../../utils';
 
-export function validate(input){  
-  let errors = {}
-  if(!input.nombre){
-    errors.nombre = 'Ingresa un nombre.';
-    console.log(input.nombre)
-  } else if (input.nombre.length < 3) {
-    errors.nombre = 'Debe contener al menos 3 caracteres';
-  } 
-  if(!input.vida){
-    errors.vida = 'Ingresa un valor "vida"';
-  } else if (input.vida <= 0 || input.vida > 150){
-    errors.vida = 'Valor entre 1 y 150';
-  }
-  if(!input.fuerza){
-    errors.fuerza = 'Ingresa un valor "fuerza"';
-  } else if (input.fuerza <= 0 || input.fuerza > 150){
-    errors.fuerza = 'Valor entre 1 y 150';
-  }
-  if(!input.defensa){
-    errors.defensa = 'Ingresa un valor "defensa"';
-  } else if (input.defensa <= 0 || input.defensa > 150){
-    errors.defensa = 'Valor entre 1 y 150';
-  }
-  if(!input.velocidad){
-    errors.velocidad = 'Ingresa un valor "velocidad"';
-  } else if (input.velocidad <= 0 || input.velocidad > 150){
-    errors.velocidad = 'Valor entre 1 y 150';
-  }
-  if(!input.altura){
-    errors.altura = 'Ingresa un valor "altura"';
-  } else if (input.altura <= 0 || input.altura > 100){
-    errors.altura = 'Ingresa un valor entre 1 y 100';
-  }
-  if(!input.peso){
-    errors.peso = 'Ingresa un valor "peso"';
-  } else if (input.altura <= 0 || input.altura > 3000){
-    errors.peso = 'Ingresa un valor entre 1 y 3000';
-  }
-  if(!input.imagen){
-    errors.imagen = 'Ingresa un valor "imagen"';
-  } else if (typeof input.imagen !== 'string'){
-    errors.imagen = 'Debes ingresar una url que contenga la imagen';
-  }
 
-  return errors
-}
+
+// function validateTypes(tipos){
+//   let errors = {}
+//   if(tipos.length === 0){
+//     errors.tipos = 'Debe contener al menos un tipo.'
+//   }
+//   return errors
+// }
 
 
 const PokemonCreate = () => {
+
+  function validate(input){  
+    let errors = {}
+    if (input.nombre.length < 3) {
+      errors.nombre = 'Debe contener al menos 3 caracteres';
+    } 
+    if(!input.vida){
+      errors.vida = 'Ingresa un valor "vida"';
+    } else if (input.vida <= 0 || input.vida > 150){
+      errors.vida = 'Valor entre 1 y 150';
+    }
+    if(!input.fuerza){
+      errors.fuerza = 'Ingresa un valor "fuerza"';
+    } else if (input.fuerza <= 0 || input.fuerza > 150){
+      errors.fuerza = 'Valor entre 1 y 150';
+    }
+    if(!input.defensa){
+      errors.defensa = 'Ingresa un valor "defensa"';
+    } else if (input.defensa <= 0 || input.defensa > 150){
+      errors.defensa = 'Valor entre 1 y 150';
+    }
+    if(!input.velocidad){
+      errors.velocidad = 'Ingresa un valor "velocidad"';
+    } else if (input.velocidad <= 0 || input.velocidad > 150){
+      errors.velocidad = 'Valor entre 1 y 150';
+    }
+    if(!input.altura){
+      errors.altura = 'Ingresa un valor "altura"';
+    } else if (input.altura <= 0 || input.altura > 100){
+      errors.altura = 'Ingresa un valor entre 1 y 100';
+    }
+    if(!input.peso){
+      errors.peso = 'Ingresa un valor "peso"';
+    } else if (input.altura <= 0 || input.altura > 3000){
+      errors.peso = 'Ingresa un valor entre 1 y 3000';
+    }
+    if(!input.imagen){
+      errors.imagen = 'Ingresa un valor "imagen"';
+    } else if (typeof input.imagen !== 'string'){
+      errors.imagen = 'Debes ingresar una url que contenga la imagen';
+    }
+    if(types.length === 0){
+      errors.tipos = 'Debe contener al menos un tipo.'
+    }  
+    return errors
+  }
   
   let tipos = useSelector((state) => state.types)
 
@@ -64,10 +73,7 @@ const PokemonCreate = () => {
     if(!tipos.length){
       dispatch(getAllTypes())
     }
-  }, [dispatch, tipos.length])
-
-
-  
+  }, [dispatch, tipos.length])  
   
   const [input, setInput] = useState({
     nombre: "",
@@ -91,33 +97,36 @@ const PokemonCreate = () => {
       ...input,
       [e.target.name]: e.target.value
     });
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value
+    }))  
+    
   }
   
   const handleInputSubmit = function(e){
     e.preventDefault() 
-        setErrors(validate({
-          ...input,
-          [e.target.name]: e.target.value
-        }))        
-
-        let body = {
-          ...input,
-          tipos: types
-        }
-        dispatch(createPokemons(body))
-        setInput({
-          nombre: "",
-          vida: "",
-          fuerza: "",
-          defensa: "",
-          velocidad: "",
-          altura: "",
-          peso: "",
-          imagen: "",
-        })
-        setTypes([])
-        
+      
+    if(Object.keys(errors).length === 0){    
+      let body = {
+        ...input,
+        tipos: types
       }
+      dispatch(createPokemons(body))
+      setInput({
+        nombre: "",
+        vida: "",
+        fuerza: "",
+        defensa: "",
+        velocidad: "",
+        altura: "",
+        peso: "",
+        imagen: "",
+      })
+      
+    } 
+        
+  }
 
 
       const handleInputCheckbox = function(e){ 
@@ -128,6 +137,8 @@ const PokemonCreate = () => {
          nuevoArray = types.filter((nombre) => e.target.name !== nombre)                
         }
         setTypes(nuevoArray)    
+
+      
       }
 
       return (
@@ -221,7 +232,10 @@ const PokemonCreate = () => {
                           <label >{capitalizeLetter(tipo.nombre)}</label>
                         </div>                    
                       )
-                    })}           
+                    })} 
+                    {errors.tipos && (
+                        <p className={s.danger}>{errors.tipos}</p>
+                    )}          
                   </div>
 
                 </div>                                   

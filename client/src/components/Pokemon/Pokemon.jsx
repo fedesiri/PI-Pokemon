@@ -16,7 +16,7 @@ export default function Pokemon({nombre, imagen, tipos, id}) {
                 <h4>{tipos.length > 1 ? 'Tipos: ' : 'Tipo: '}</h4>
                 <ul>
                 {tipos?.map((tipo) =>{
-                    return <li key={tipo.id}>{tipo.nombre} </li>                    
+                    return <li key={tipo.id}>{capitalizeLetter(tipo.nombre)} </li>                    
                 })}      
                 </ul>
             </div>

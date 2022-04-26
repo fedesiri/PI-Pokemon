@@ -4,13 +4,14 @@
     justify-content: space-between;
     width:15%;
     background-color: rgb(255, 196, 0);
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 12px;
-    margin-top: 12px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 16px;
+    margin-top: 16px;
     border-radius: 10px;
     box-shadow: 7px 10px 12px -1px rgba(0,0,0,0.81);
     border: 2px solid #141313;
+    max-height: 400px;
 }
 
 .nombrePokemon{
@@ -33,6 +34,7 @@
 .hijo2{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     height: 20%;   
     margin-left: 5px;
