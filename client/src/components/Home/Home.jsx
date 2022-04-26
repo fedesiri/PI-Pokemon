@@ -24,12 +24,30 @@ const Home = () => {
     const paginado = (numeroDePagina) => {        
         setPaginaActual(numeroDePagina)        
     }
+
+    function paginadoAnterior(){
+        if(paginaActual > 1){
+            setPaginaActual(paginaActual -1)
+        }
+    }
+
+    function paginadoSiguiente(){
+        let ultimaPagina = Math.ceil(pokemons.length/pokemonsPorPagina)
+        if(paginaActual < ultimaPagina){
+            setPaginaActual(paginaActual +1)
+        }
+    }
     
+
     useEffect(() =>{
         if(!todosLosPokemons.length){
             dispatch(getAllPokemons())
         }
-    }, [dispatch, todosLosPokemons.length])
+        let ultimaPagina = Math.ceil(pokemons.length/pokemonsPorPagina)
+        if(paginaActual > ultimaPagina){
+            setPaginaActual(1)
+        }
+    }, [dispatch, todosLosPokemons.length,pokemons.length, paginaActual])
 
 
     return (               
@@ -47,6 +65,8 @@ const Home = () => {
                                 pokemons={pokemons.length}
                                 paginado = {paginado}
                                 paginaActual = {paginaActual}
+                                paginadoAnterior={paginadoAnterior}
+                                paginadoSiguiente={paginadoSiguiente}
                                 />                        
                                 </div>
 
@@ -71,6 +91,8 @@ const Home = () => {
                                 pokemons={pokemons.length}
                                 paginado = {paginado}
                                 paginaActual = {paginaActual}
+                                paginadoAnterior={paginadoAnterior}
+                                paginadoSiguiente={paginadoSiguiente}
                                 />                        
                                 </div>
                 </div>

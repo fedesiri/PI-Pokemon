@@ -1,10 +1,8 @@
+
+
 .papa{
-    min-height: 100vh;
-    /* background-color: rgba(255, 255, 0, 0.829);    */
-    background: #fceabb;  
-    background: -webkit-linear-gradient(to top, #f8b500, #fceabb); 
-    background: linear-gradient(to top, #f8b500, #fceabb); 
-    
+    min-height: 100vh;    
+    background: linear-gradient(to top, #f8b500, #fceabb);    
 }
 
 .nombre{
@@ -63,7 +61,11 @@
     justify-content: space-evenly;
 }
 
-
+.botonUbicacion{
+    padding-top: 10px;
+    padding-bottom: 10px;    
+    background-color: rgb(255, 196, 0);
+}
 
 .boton{
     text-decoration: none;

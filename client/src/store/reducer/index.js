@@ -57,12 +57,12 @@ export default function reducer(state = initialState, action) {
             filtrados: ordenados
         }
     }
-    if(action.type === POKEMON_CREATE){
-        return{
-            ...state,
-            pokemons: state.pokemons.concat(action.payload),
-            filtrados: state.pokemons.concat(action.payload),
-        }
+    if(action.type === POKEMON_CREATE){        
+            return{
+                ...state,
+                pokemons: state.pokemons.concat(action.payload),
+                filtrados: state.pokemons.concat(action.payload),
+            }
     }
     if(action.type === FILTER_BY_CREATED_OR_EXISTING){
         let filtrados = [...state.pokemons]

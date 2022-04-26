@@ -64,12 +64,12 @@ const PokemonDetail = (props) => {
             <div className={s.altPeso}>
                 <h4>Altura: {pokemonDetails.altura}</h4>
                 <h4>Peso: {pokemonDetails.peso}</h4>
-            </div>
-
+            </div>            
             
-            
-            
+            <div className={s.botonUbicacion}>
             <Link to={'/home'}><button className={s.boton} >Regresar a 'Home'</button></Link>
+            </div>
+            
         </div>
     );
 };

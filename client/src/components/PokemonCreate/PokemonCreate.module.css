@@ -73,17 +73,6 @@ form {
     width: 60%;
 }
 
-p.danger {
-    color: red;
-    font-size: 10px;
-  }
-  
-  input.danger {
-    border: 1px solid red;
-  }
-
-
-
 .tipos {
     width: 30%;
     height: 100%;
@@ -109,6 +98,37 @@ p.danger {
     justify-content: center;
     align-items: center;
 }
+
+
+.div3bis{
+    /* display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    background: linear-gradient(to right, #f8b500, #fceabb); */
+
+    background: linear-gradient(to right, #f8b500, #fceabb);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.div4{
+    background: linear-gradient(to right, #f8b500, #fceabb);
+    padding-bottom: 25px;
+}
+
+span.danger {
+    color: red;
+    font-size: 15px;
+  }
+  
+  input.danger {
+    border: 1px solid red;
+  }
+
 
 .botonDeRegreso {
     height: 10%;
