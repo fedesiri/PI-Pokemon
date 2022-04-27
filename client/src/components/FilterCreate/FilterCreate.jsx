@@ -6,7 +6,7 @@ export default function FilterCreate(){
     let dispatch = useDispatch()
 
     function onSelectChange(e){ 
-        dispatch(filterByCreatedOrExisting(e.target.value))        
+        dispatch(filterByCreatedOrExisting(e.target.value))       
     }
 
 

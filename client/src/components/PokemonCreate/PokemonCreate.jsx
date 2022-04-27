@@ -107,7 +107,6 @@ const PokemonCreate = () => {
   
   const handleInputSubmit = function(e){
     e.preventDefault() 
-      console.log(errors)
     if(Object.keys(errors).length === 0){    
       let body = {
         ...input,
