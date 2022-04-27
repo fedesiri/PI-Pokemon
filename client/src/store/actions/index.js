@@ -73,6 +73,7 @@ export const createPokemons = (body) => {
                     type: POKEMON_CREATE,
                     payload: pokemonCreado.data
                 })
+                alert('Pokemon creado correctamente!')
             }
         } catch (error){
             console.log(error)
