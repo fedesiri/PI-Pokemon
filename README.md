@@ -50,8 +50,18 @@ To bring the server online, run npm start.
 
 For the front, no additional configurations are required. Run npm install in the Client folder and then npm start to launch the application.
 
-
-
 <hr />
+
+## Presentation and functionalities
+
+### Home
+
+The main view contains a navbar with its searchfield to search for pokemons by their names. In this component you can also find twelve cards that contains a different pokemon. You will have several pages with lots of pokemons in each one of them. At the bottom of the navbar, yo have some selects that are used to filter the pokemons by their properties.
+
+Pokemon Detail
+In this view you will be able to see all the pokemon's details and the types that belongs to it.
+
+Create pokemon
+This is a form where you can create your own pokemon as you like. It is a controlled form, and its fields are validated with javascript. Each text input is validated in order to check if it is not empty and if the value that the user enter is correct. If everything was ok, it shows a success message to tell the user that the pokemon has been created.
 
 
