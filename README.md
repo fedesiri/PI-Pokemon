@@ -56,6 +56,10 @@ For the front, no additional configurations are required. Run npm install in the
 
 ### Home
 
+<p align="center">
+  <img height="500" src="./homePokemonReadme.png" />
+</p>
+
 The main view contains a navbar with its searchfield to search for pokemons by their names. In this component you can also find twelve cards that contains a different pokemon. You will have several pages with lots of pokemons in each one of them. At the bottom of the navbar, yo have some selects that are used to filter the pokemons by their properties.
 
 Pokemon Detail
